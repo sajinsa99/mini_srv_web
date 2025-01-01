@@ -1,0 +1,1 @@
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK8WoIzwTbxGPhksbha1h7Kl3NgTvTZND/tzrVpsXkto brunofablet@MBA-2023-05-15-BF.local
