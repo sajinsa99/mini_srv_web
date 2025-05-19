@@ -6,26 +6,26 @@ echo
 
 # Fonction pour récupérer la date de création (startdate) du certificat au format YYYY-MM-DD
 get_pem_creation_date() {
-    local domain="$1"local cert_fullchain_path cert_dir cert_path cert_startdate formatted_date
+    local domain="$1"
+    local cert_fullchain_path cert_dir cert_path cert_startdate formatted_date
 
-  # Si pas de domaine donné, prend le premier certificat certbot trouvé
-  if [ -z "$domain" ]; then
+    # Si pas de domaine donné, prend le premier certificat certbot trouvé
+    if [ -z "$domain" ]; then
       domain=$(/usr/bin/certbot certificates 2>/dev/null  | grep '^  Certificate Name:' | head -n1 | awk '{print $3}')
-  fi
-
-  if [ -z "$domain" ]; then
+    fi
+    
+    if [ -z "$domain" ]; then
       echo "Erreur : aucun domaine trouvé via certbot certificates" >&2
       return 1
-  fi
-
-  # Récupérer le chemin du fullchain.pem pour ce domaine
-  cert_fullchain_path=$(/usr/bin/certbot certificates 2>/dev/null | awk -v dom="$domain" '
-  $0 ~ "Certificate Name: " dom {found=1}
-  found && /Certificate Path:/ {
-  print $NF
-  exit
+    fi
+    
+    # Récupérer le chemin du fullchain.pem pour ce domaine
+    cert_fullchain_path=$(/usr/bin/certbot certificates 2>/dev/null | awk -v dom="$domain" '
+    $0 ~ "Certificate Name: " dom {found=1}
+    found && /Certificate Path:/ {
+    print $NF
+    exit
 }
-')
 
 if [ -z "$cert_fullchain_path" ]; then
     echo "Erreur : certificat non trouvé pour le domaine $domain" >&2
