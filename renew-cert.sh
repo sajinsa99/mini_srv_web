@@ -6,8 +6,7 @@ echo
 
 # Fonction pour récupérer la date de création (startdate) du certificat au format YYYY-MM-DD
 get_pem_creation_date() {
-    local domain="$1"
-    local cert_fullchain_path cert_dir cert_path cert_startdate formatted_date
+    local domain="$1"local cert_fullchain_path cert_dir cert_path cert_startdate formatted_date
 
   # Si pas de domaine donné, prend le premier certificat certbot trouvé
   if [ -z "$domain" ]; then
